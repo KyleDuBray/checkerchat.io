@@ -1,10 +1,23 @@
-const app = require("express");
+const config = require("./config");
+const express = require("express");
+
+const app = express();
+app.use(express.json());
+
+app.get("/users", (req, res) => {
+  res.send("someone tried to get the users");
+});
+
+app.use("/api/users", require("./routes/api/users"));
+
 const http = require("http").createServer(app);
 const io = require("socket.io")(http, {
   cors: {
     origin: "http://localhost:3000",
   },
 });
+
+const { PORT } = config;
 
 // Chat room implementation has a default room
 // that a client will automatically join.
@@ -67,6 +80,6 @@ io.on("connection", (socket) => {
   });
 });
 
-http.listen(4000, function () {
-  console.log("listening on Port 4000");
+http.listen(PORT, function () {
+  console.log(`listening on Port ${PORT}`);
 });
