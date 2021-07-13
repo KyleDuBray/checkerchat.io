@@ -1,4 +1,8 @@
-const INITIAL_STATE = "";
+const INITIAL_STATE = {
+  email: "",
+  name: "",
+  friends: {},
+};
 
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
