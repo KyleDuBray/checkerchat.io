@@ -1,0 +1,66 @@
+/**************************
+NORMALIZE
+*************************** */
+
+button {
+  font-family: inherit; /* For all browsers */
+  font-size: 100%; /* For all browsers */
+  line-height: 1.15; /* For all browsers */
+  margin: 0; /* Firefox and Safari have margin */
+  overflow: visible; /* Edge hides overflow */
+  text-transform: none; /* Firefox inherits text-transform */
+  -webkit-appearance: button; /* Safari otherwise prevents some styles */
+}
+
+button::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+button:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**************************
+Focus styles via keyboard using 
+*************************** */
+
+/* Fixing the Safari bug for `<button>`s overflow */
+.fix-focus {
+  position: relative;
+}
+
+/* Removing the focus ring styles specifically for button in Firefox */
+button:not(:-moz-focusring):focus > .fix-focus {
+  box-shadow: none;
+}
+
+/* Removing default outline only after we've added our custom one */
+.fix-focus:focus {
+  outline: none;
+}
+
+/**************************
+Form Buttons
+*************************** */
+.textbox-send-btn,
+.textbox-send-span {
+  border: 0;
+  border-radius: 0.25rem;
+  background: #80ff937b;
+  cursor: pointer;
+  transition: all 0.2s;
+  height: 26.4px;
+  width: 80px;
+  margin-right: 2px;
+}
+
+.textbox-cancel-btn,
+.textbox-cancel-span {
+  border: 0;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  height: 26.4px;
+  width: 80px;
+}
