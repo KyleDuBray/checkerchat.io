@@ -1,5 +1,5 @@
-import React from 'react';
-import Space from './Space';
+import React from "react";
+import Space from "./Space";
 
 const Row = ({ rowArray, rowIndex }) => {
   const renderBoardSpaces = () => {
@@ -7,7 +7,7 @@ const Row = ({ rowArray, rowIndex }) => {
       return <Space spaceType={space} key={index} spaceIndex={index} />;
     });
   };
-  return <div className="row">{renderBoardSpaces()}</div>;
+  return <>{renderBoardSpaces()}</>;
 };
 
 export default Row;
