@@ -7,8 +7,6 @@ const { check, validationResult } = require("express-validator");
 
 const { JWT_SECRET } = config;
 
-const auth = require("../../middleware/auth");
-
 const User = require("../../models/User");
 
 // @route    POST api/users

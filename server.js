@@ -48,6 +48,10 @@ io.on("connection", (socket) => {
     for (const r in rooms) {
       if (rooms[r].includes(socket.id)) {
         rooms[r].splice(rooms[r].indexOf(socket.id), 1);
+        // If left room is now empty, remove it from object
+        if (rooms[r].length === 0) {
+          delete rooms[r];
+        }
         socket.leave(r);
         console.log(`socket ${socket.id} has left room ${r}`);
         break;
@@ -74,9 +78,14 @@ io.on("connection", (socket) => {
         rooms[r].splice(rooms[r].indexOf(socket.id), 1);
         socket.leave(r);
         console.log(`socket ${socket.id} has left room ${r}`);
+        // If left room is now empty, remove it from object
+        if (rooms[r].length === 0) {
+          delete rooms[r];
+        }
       }
     }
     console.log("Client disconnected");
+    console.log(rooms);
   });
 });
 
