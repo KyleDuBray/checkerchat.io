@@ -1,25 +1,25 @@
-import React, { useState, useEffect, useRef } from "react";
-import io from "socket.io-client";
-import TextBox from "./TextBox";
-import "../styles/chat.css";
+import React, { useState, useEffect, useRef } from 'react';
+import io from 'socket.io-client';
+import TextBox from './TextBox';
+import '../../styles/chat.css';
 
 const ChatBox = () => {
-  const [state, setState] = useState({ message: "", name: "", room: "" });
+  const [state, setState] = useState({ message: '', name: '', room: '' });
   const [chat, setChat] = useState([]);
 
-  const [room, setRoom] = useState("default");
+  const [room, setRoom] = useState('default');
 
   const [isSocketConnected, setIsSocketConnected] = useState(false);
 
   const socketRef = useRef();
 
-  const defaultRoom = "default";
+  const defaultRoom = 'default';
 
   useEffect(() => {
     const connectToSocketServer = async () => {
-      socketRef.current = await io.connect("http://localhost:4000");
+      socketRef.current = await io.connect('http://localhost:4000');
       setIsSocketConnected(true);
-      socketRef.current.emit("join-room", defaultRoom);
+      socketRef.current.emit('join-room', defaultRoom);
     };
     connectToSocketServer();
 
@@ -28,7 +28,7 @@ const ChatBox = () => {
 
   useEffect(() => {
     if (isSocketConnected) {
-      socketRef.current.on("message", ({ name, message }) => {
+      socketRef.current.on('message', ({ name, message }) => {
         setChat([...chat, { name, message }]);
       });
     }
@@ -39,17 +39,17 @@ const ChatBox = () => {
   };
 
   const onMessageSubmit = (message) => {
-    socketRef.current.emit("message", {
+    socketRef.current.emit('message', {
       name: socketRef.current.id,
       message,
       room,
     });
-    setState({ message: "", name: socketRef.current.id });
+    setState({ message: '', name: socketRef.current.id });
   };
 
   const onRoomSubmit = (roomName) => {
     setRoom(roomName);
-    socketRef.current.emit("join-room", roomName);
+    socketRef.current.emit('join-room', roomName);
   };
 
   const renderChat = () => {

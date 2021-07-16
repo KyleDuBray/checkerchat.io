@@ -1,13 +1,21 @@
 import React from 'react';
 import './styles/base.css';
-import ChatBox from './components/ChatBox';
-import CheckerBoard from './components/CheckerBoard';
+
+import { Router, Route, Switch } from 'react-router-dom';
+import history from './history';
+
+import Game from './components/game/Game';
 
 const App = () => {
   return (
     <>
-      <CheckerBoard />
-      <ChatBox />
+      <Router history={history}>
+        <div>
+          <Switch>
+            <Route exact path="/game/:id" component={Game}></Route>
+          </Switch>
+        </div>
+      </Router>
     </>
   );
 };

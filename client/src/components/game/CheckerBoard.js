@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Row from './Row';
-import '../styles/checkers.css';
+import '../../styles/checkers.css';
 
 const CheckerBoard = () => {
   const dispatch = useDispatch();

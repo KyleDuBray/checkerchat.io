@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Button from './Button';
+import Button from '../Button';
 
-import '../styles/textbox.css';
+import '../../styles/textbox.css';
 
 const TextBox = ({ onTextChange, onMessageSubmit, onRoomSubmit }) => {
   const [chatText, setChatText] = useState('');
