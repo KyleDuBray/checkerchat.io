@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { returnErrors } from './errorActions';
+import axios from "axios";
+import { returnErrors } from "./errorActions";
 
 import {
   USER_LOADING,
@@ -10,7 +10,7 @@ import {
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
-} from './types';
+} from "./types";
 
 // Check token & load user
 export const loadUser = () => (dispatch, getState) => {
@@ -18,7 +18,7 @@ export const loadUser = () => (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
 
   axios
-    .get('/api/auth/user', tokenConfig(getState))
+    .get("http://localhost:4000/api/auth", tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: USER_LOADED,
@@ -26,6 +26,7 @@ export const loadUser = () => (dispatch, getState) => {
       })
     )
     .catch((err) => {
+      console.log(err);
       dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({ type: AUTH_ERROR });
     });
@@ -38,7 +39,7 @@ export const register =
     // Headers
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
@@ -46,7 +47,7 @@ export const register =
     const body = JSON.stringify({ name, email, password });
 
     axios
-      .post('/api/users', body, config)
+      .post("/api/users", body, config)
       .then((res) =>
         dispatch({
           type: REGISTER_SUCCESS,
@@ -55,7 +56,7 @@ export const register =
       )
       .catch((err) => {
         dispatch(
-          returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL')
+          returnErrors(err.response.data, err.response.status, "REGISTER_FAIL")
         );
         dispatch({
           type: REGISTER_FAIL,
@@ -70,7 +71,7 @@ export const login =
     // Headers
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
@@ -78,7 +79,7 @@ export const login =
     const body = JSON.stringify({ email, password });
 
     axios
-      .post('/api/auth', body, config)
+      .post("/api/auth", body, config)
       .then((res) =>
         dispatch({
           type: LOGIN_SUCCESS,
@@ -87,7 +88,7 @@ export const login =
       )
       .catch((err) => {
         dispatch(
-          returnErrors(err.response.data, err.response.status, 'LOGIN_FAIL')
+          returnErrors(err.response.data, err.response.status, "LOGIN_FAIL")
         );
         dispatch({
           type: LOGIN_FAIL,
@@ -110,13 +111,13 @@ export const tokenConfig = (getState) => {
   // Headers
   const config = {
     headers: {
-      'Content-type': 'application/json',
+      "Content-type": "application/json",
     },
   };
 
   // If token, add to headers
   if (token) {
-    config.headers['x-auth-token'] = token;
+    config.headers["x-auth-token"] = token;
   }
 
   return config;

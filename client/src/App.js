@@ -1,12 +1,20 @@
-import React from 'react';
-import './styles/base.css';
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import "./styles/base.css";
 
-import { Router, Route, Switch } from 'react-router-dom';
-import history from './history';
+import { Router, Route, Switch } from "react-router-dom";
+import history from "./history";
 
-import Game from './components/game/Game';
+import { loadUser } from "./actions/authActions";
+
+import Game from "./components/game/Game";
 
 const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadUser());
+  }, []);
+
   return (
     <>
       <Router history={history}>

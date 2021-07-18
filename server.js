@@ -1,11 +1,14 @@
 const config = require("./config");
 const express = require("express");
 const connectDB = require("./config/db");
+const cors = require("cors");
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.use("/api/users", require("./routes/api/users"));
+app.use("/api/auth", require("./routes/api/auth"));
 
 const http = require("http").createServer(app);
 const io = require("socket.io")(http, {
