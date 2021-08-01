@@ -1,13 +1,12 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import "./styles/base.css";
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { Router, Route, Switch } from "react-router-dom";
-import history from "./history";
+import { Router, Route, Switch } from 'react-router-dom';
+import history from './history';
 
-import { loadUser } from "./actions/authActions";
+import { loadUser } from './actions/authActions';
 
-import Game from "./components/game/Game";
+import Game from './components/game/Game';
 
 const App = () => {
   const dispatch = useDispatch();

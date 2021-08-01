@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import Button from '../Button';
 
-import '../../styles/textbox.css';
-
 const TextBox = ({ onTextChange, onMessageSubmit, onRoomSubmit }) => {
   const [chatText, setChatText] = useState('');
   const [roomText, setRoomText] = useState('');
@@ -30,36 +28,43 @@ const TextBox = ({ onTextChange, onMessageSubmit, onRoomSubmit }) => {
     setRoomText(e.target.value);
   };
   return (
-    <div className="textbox--content">
-      <div className="textbox--head">
-        <h1>Hello there</h1>
+    <div className="w-screen flex justify-center flex-col">
+      <div className="p-2">
+        <h1>Chat</h1>
       </div>
       <hr />
-      <form className="textbox">
-        <div className="textbox--fields">
-          <div className="field">
-            <label>Send Message</label>
-            <input type="text" value={chatText} onChange={onChatTextChange} />
+      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div className="">
+          <div className="">
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              type="text"
+              value={chatText}
+              onChange={onChatTextChange}
+            />
           </div>
           <Button
             content={'Send'}
             handleClick={handleMessageSubmit}
-            innerClass="textbox-send-span"
-            outerClass="textbox-send-btn"
+            kind="primary"
           />
         </div>
       </form>
-      <form className="textbox">
-        <div className="textbox--fields">
-          <div className="field">
-            <label>Room</label>
-            <input type="text" value={roomText} onChange={onRoomTextChange} />
+      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div className="">
+          <div className="">
+            <label>Change Room</label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              type="text"
+              value={roomText}
+              onChange={onRoomTextChange}
+            />
           </div>
           <Button
             handleClick={handleRoomSubmit}
             content="Change Room"
-            innerClass="textbox-cancel-span"
-            outerClass="textbox-cancel-btn"
+            kind="secondary"
           />
         </div>
       </form>

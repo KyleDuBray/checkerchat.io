@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import TextBox from './TextBox';
-import '../../styles/chat.css';
 
 const ChatBox = () => {
   const [state, setState] = useState({ message: '', name: '', room: '' });
@@ -63,7 +62,7 @@ const ChatBox = () => {
   };
 
   return (
-    <div className="chat-container">
+    <div className="">
       {renderChat()}
       <TextBox
         onTextChange={onTextChange}
