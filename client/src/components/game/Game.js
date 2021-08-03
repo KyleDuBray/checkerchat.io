@@ -1,11 +1,11 @@
-import React from 'react';
-import CheckerBoard from './CheckerBoard';
-import ChatBox from './ChatBox';
+import React from "react";
+import CheckerBoard from "./CheckerBoard";
+import ChatBox from "./ChatBox";
 
 const Game = (props) => {
-  console.log(props.match.params.id);
+  console.log(`game ID: ${props.match.params.id}`);
   return (
-    <div>
+    <div className="w-screen h-screen ">
       <CheckerBoard />
       <ChatBox />
     </div>

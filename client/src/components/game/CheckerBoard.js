@@ -1,8 +1,7 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import Row from './Row';
-import '../../styles/checkers.css';
+import Row from "./Row";
 
 const CheckerBoard = () => {
   const dispatch = useDispatch();
@@ -15,7 +14,11 @@ const CheckerBoard = () => {
     return rows;
   };
 
-  return <div className="board">{renderBoardRows()}</div>;
+  return (
+    <div className="grid grid-cols-8 grid-rows-8 w-9/12 h-3/5 border border-solid">
+      {renderBoardRows()}
+    </div>
+  );
 };
 
 export default CheckerBoard;
