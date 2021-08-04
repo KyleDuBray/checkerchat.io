@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
-import Button from '../Button';
+import React, { useState } from "react";
+import Button from "../Button";
 
 const TextBox = ({ onTextChange, onMessageSubmit, onRoomSubmit }) => {
-  const [chatText, setChatText] = useState('');
-  const [roomText, setRoomText] = useState('');
+  const [chatText, setChatText] = useState("");
+  const [roomText, setRoomText] = useState("");
 
   // ONSUBMIT HANDLERS
   const handleMessageSubmit = (e) => {
     e.preventDefault();
     onMessageSubmit(chatText);
-    setChatText('');
+    setChatText("");
   };
 
   const handleRoomSubmit = (e) => {
     e.preventDefault();
     onRoomSubmit(roomText);
-    setRoomText('');
+    setRoomText("");
   };
 
   // ONCHANGE HANDLERS
@@ -28,7 +28,7 @@ const TextBox = ({ onTextChange, onMessageSubmit, onRoomSubmit }) => {
     setRoomText(e.target.value);
   };
   return (
-    <div className="w-screen flex justify-center flex-col">
+    <div className="w-auto flex justify-center flex-col">
       <div className="p-2">
         <h1>Chat</h1>
       </div>
@@ -44,7 +44,7 @@ const TextBox = ({ onTextChange, onMessageSubmit, onRoomSubmit }) => {
             />
           </div>
           <Button
-            content={'Send'}
+            content={"Send"}
             handleClick={handleMessageSubmit}
             kind="primary"
           />

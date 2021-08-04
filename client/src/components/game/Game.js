@@ -5,7 +5,7 @@ import ChatBox from "./ChatBox";
 const Game = (props) => {
   console.log(`game ID: ${props.match.params.id}`);
   return (
-    <div className="w-screen h-screen ">
+    <div className="flex h-screen">
       <CheckerBoard />
       <ChatBox />
     </div>

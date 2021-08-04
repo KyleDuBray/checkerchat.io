@@ -15,7 +15,7 @@ const CheckerBoard = () => {
   };
 
   return (
-    <div className="grid grid-cols-8 grid-rows-8 w-9/12 h-3/5 border border-solid">
+    <div className="grid grid-cols-8 grid-rows-8 w-9/12 h-4/5 border border-solid mt-10">
       {renderBoardRows()}
     </div>
   );
