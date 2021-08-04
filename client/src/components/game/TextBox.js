@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Button from '../Button';
+import { ReactComponent as SendImg } from '../../icons/send.svg';
 
 const TextBox = ({ onTextChange, onMessageSubmit, onRoomSubmit }) => {
   const [chatText, setChatText] = useState('');
@@ -34,25 +35,25 @@ const TextBox = ({ onTextChange, onMessageSubmit, onRoomSubmit }) => {
       </div>
       <hr />
       <div className="bg-white shadow-md rounded px-4 pt-6 pb-8 mb-4">
-        <div className="">
+        <div className="flex mb-6">
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="text"
             value={chatText}
             onChange={onChatTextChange}
           />
-        </div>
-
-        <div className="flex">
           <Button
-            content={'Send'}
+            content={<SendImg width="20px" height="20px" />}
             handleClick={handleMessageSubmit}
             kind="primary"
           />
-          <div className="flex justify-end items-center">
-            <label>Change Room</label>
+        </div>
+
+        <div className="flex">
+          <div className="flex items-center">
+            <label className="mr-2">Change Room</label>
             <input
-              className="shadow appearance-none border rounded w-1/5 py-2 px-3  text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-1/5 py-2 px-3 mr-2  text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               value={roomText}
               onChange={onRoomTextChange}
