@@ -8,15 +8,27 @@ const TextBox = ({ onTextChange, onMessageSubmit, onRoomSubmit }) => {
 
   // ONSUBMIT HANDLERS
   const handleMessageSubmit = (e) => {
-    e.preventDefault();
+    e?.preventDefault();
     onMessageSubmit(chatText);
     setChatText('');
   };
 
   const handleRoomSubmit = (e) => {
-    e.preventDefault();
+    e?.preventDefault();
     onRoomSubmit(roomText);
     setRoomText('');
+  };
+
+  const handleEnterChatPress = (e) => {
+    if (e.key === 'Enter') {
+      handleMessageSubmit();
+    }
+  };
+
+  const handleEnterRoomPress = (e) => {
+    if (e.key === 'Enter') {
+      handleRoomSubmit();
+    }
   };
 
   // ONCHANGE HANDLERS
@@ -41,6 +53,7 @@ const TextBox = ({ onTextChange, onMessageSubmit, onRoomSubmit }) => {
             type="text"
             value={chatText}
             onChange={onChatTextChange}
+            onKeyPress={handleEnterChatPress}
           />
           <Button
             content={<SendImg width="20px" height="20px" />}
@@ -57,6 +70,7 @@ const TextBox = ({ onTextChange, onMessageSubmit, onRoomSubmit }) => {
               type="text"
               value={roomText}
               onChange={onRoomTextChange}
+              onKeyPress={handleEnterRoomPress}
             />
             <Button
               handleClick={handleRoomSubmit}
