@@ -1,11 +1,35 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { ReactComponent as Logo } from '../icons/logo.svg';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { logout } from "../actions/authActions";
+import { ReactComponent as Logo } from "../icons/logo.svg";
+import Button from "./Button";
 
 const Navbar = () => {
   const auth = useSelector((state) => state.auth);
-  console.log(auth);
+  const dispatch = useDispatch();
+
+  const onLogoutSubmit = () => dispatch(logout());
+
+  const renderAuthItems = () =>
+    auth.isAuthenticated ? (
+      <Button handleClick={onLogoutSubmit} content="Logout" kind="logout" />
+    ) : (
+      <>
+        <Link to="/login">
+          <div className="inline-block text-sm px-4 py-2 leading-none border mr-6 border-gray-900 rounded hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">
+            Login
+          </div>
+        </Link>
+        <Link
+          className="block mt-4 ml lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+          to="/signup"
+        >
+          Sign Up
+        </Link>
+      </>
+    );
+
   return (
     <nav className="flex items-center justify-between flex-wrap bg-gray-100 p-6">
       <div className="flex items-center flex-shrink-0 mr-6">
@@ -39,17 +63,7 @@ const Navbar = () => {
             Game
           </Link>
         </div>
-        <Link to="/login">
-          <div className="inline-block text-sm px-4 py-2 leading-none border mr-6 border-gray-900 rounded hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">
-            Login
-          </div>
-        </Link>
-        <Link
-          className="block mt-4 ml lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-          to="/signup"
-        >
-          Sign Up
-        </Link>
+        {renderAuthItems()}
       </div>
     </nav>
   );

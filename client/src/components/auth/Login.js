@@ -1,7 +1,21 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import e from "cors";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { login } from "../../actions/authActions";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onLoginSubmit = () => {
+    console.log("logging in");
+    dispatch(login({ email, password }));
+    setEmail("");
+    setPassword("");
+  };
+
   return (
     <div className="flex justify-center">
       <div className="w-full max-w-xs">
@@ -9,15 +23,17 @@ const Login = () => {
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="username"
+              htmlFor="email"
             >
-              Username
+              Email
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="username"
+              id="email"
               type="text"
-              placeholder="Username"
+              placeholder="email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
             />
           </div>
           <div className="mb-6">
@@ -32,6 +48,8 @@ const Login = () => {
               id="password"
               type="password"
               placeholder="******************"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
             />
             <p className="text-red-500 text-xs italic">
               Please choose a password.
@@ -41,6 +59,7 @@ const Login = () => {
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300 focus:shadow-outline"
               type="button"
+              onClick={onLoginSubmit}
             >
               Sign In
             </button>
