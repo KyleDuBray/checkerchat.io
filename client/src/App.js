@@ -19,7 +19,7 @@ const App = () => {
   return (
     <>
       <Router history={history}>
-        <div>
+        <div className="h-screen">
           <Navbar />
           <Switch>
             <Route exact path="/login" component={Login}></Route>

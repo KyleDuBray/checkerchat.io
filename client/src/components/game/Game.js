@@ -1,6 +1,6 @@
-import React from "react";
-import CheckerBoard from "./CheckerBoard";
-import ChatBox from "./ChatBox";
+import React from 'react';
+import CheckerBoard from './CheckerBoard';
+import ChatBox from './ChatBox';
 
 const Game = (props) => {
   console.log(`game ID: ${props.match.params.id}`);

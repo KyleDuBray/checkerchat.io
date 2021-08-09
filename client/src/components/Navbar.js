@@ -1,9 +1,9 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { logout } from "../actions/authActions";
-import { ReactComponent as Logo } from "../icons/logo.svg";
-import Button from "./Button";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { logout } from '../actions/authActions';
+import { ReactComponent as Logo } from '../icons/logo.svg';
+import Button from './Button';
 
 const Navbar = () => {
   const auth = useSelector((state) => state.auth);
@@ -17,12 +17,12 @@ const Navbar = () => {
     ) : (
       <>
         <Link to="/login">
-          <div className="inline-block text-sm px-4 py-2 leading-none border mr-6 border-gray-900 rounded hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">
+          <div className="inline-block text-sm px-4 py-2 leading-none border mr-6 border-gray-900 rounded hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 md:mt-0">
             Login
           </div>
         </Link>
         <Link
-          className="block mt-4 ml lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+          className="block mt-4 ml md:inline-block md:mt-0 text-teal-200 hover:text-white mr-4"
           to="/signup"
         >
           Sign Up
@@ -31,7 +31,7 @@ const Navbar = () => {
     );
 
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-gray-100 p-6">
+    <nav className="absolute w-screen flex items-center justify-between flex-wrap bg-gray-100 p-6">
       <div className="flex items-center flex-shrink-0 mr-6">
         <Link to="/">
           <div className="flex items-center">
@@ -42,7 +42,7 @@ const Navbar = () => {
           </div>
         </Link>
       </div>
-      <div className="block lg:hidden">
+      <div className="block md:hidden">
         <button className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
           <svg
             className="fill-current h-3 w-3"
@@ -54,11 +54,11 @@ const Navbar = () => {
           </svg>
         </button>
       </div>
-      <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-        <div className="text-sm lg:flex-grow">
+      <div className="w-full block flex-grow md:flex md:items-center md:w-auto">
+        <div className="text-sm md:flex-grow">
           <Link
             to="/game/test"
-            className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+            className="block mt-4 md:inline-block md:mt-0 text-teal-200 hover:text-white mr-4"
           >
             Game
           </Link>
