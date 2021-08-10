@@ -49,6 +49,9 @@ const Login = () => {
               placeholder="******************"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') onLoginSubmit();
+              }}
             />
             <p className="text-red-500 text-xs italic">
               Please choose a password.
