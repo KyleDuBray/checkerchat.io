@@ -12,8 +12,9 @@ import {
   CLEAR_LOGIN_ERROR,
   SET_SERVER_ERROR,
   CLEAR_SERVER_ERROR,
-} from '../actions/types';
+} from "../actions/types";
 
+// Error state format to go to store: [{msg:"", type:"<SOMETYPE>_ERROR"}, ...]
 const initialState = [];
 
 const errorReducer = (state = initialState, action) => {
