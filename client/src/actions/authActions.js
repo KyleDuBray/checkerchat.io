@@ -1,16 +1,27 @@
 import axios from 'axios';
-import { returnErrors } from './errorActions';
+import { setTokenError, setLoginError, setRegisterError } from './errorActions';
 import history from '../history';
 
 import {
   USER_LOADING,
   USER_LOADED,
-  AUTH_ERROR,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
-  REGISTER_FAIL,
+  LOGIN_SUCCESS,
+  LOGOUT_SUCCESS,
+  CLEAR_ERRORS,
+  SET_TOKEN_ERROR,
+  CLEAR_TOKEN_ERROR,
+  SET_EMAIL_ERROR,
+  CLEAR_EMAIL_ERROR,
+  SET_PASSWORD_ERROR,
+  CLEAR_PASSWORD_ERROR,
+  SET_REGISTER_ERROR,
+  CLEAR_REGISTER_ERROR,
+  SET_LOGIN_ERROR,
+  CLEAR_LOGIN_ERROR,
+  SET_SERVER_ERROR,
+  CLEAR_SERVER_ERROR,
+  RESET_TOKEN,
 } from './types';
 
 // Check token & load user
@@ -20,16 +31,16 @@ export const loadUser = () => (dispatch, getState) => {
 
   axios
     .get('http://localhost:4000/api/auth', tokenConfig(getState))
-    .then((res) =>
+    .then((res) => {
       dispatch({
         type: USER_LOADED,
         payload: res.data,
-      })
-    )
+      });
+    })
     .catch((err) => {
       console.log(err);
-      dispatch(returnErrors(err.response.data, err.response.status));
-      dispatch({ type: AUTH_ERROR });
+      dispatch(setTokenError());
+      dispatch({ type: RESET_TOKEN });
     });
 };
 
@@ -56,11 +67,9 @@ export const register =
         })
       )
       .catch((err) => {
-        dispatch(
-          returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL')
-        );
+        dispatch(setRegisterError());
         dispatch({
-          type: REGISTER_FAIL,
+          type: RESET_TOKEN,
         });
       });
   };
@@ -89,11 +98,9 @@ export const login =
         history.push('/home');
       })
       .catch((err) => {
-        dispatch(
-          returnErrors(err.response.data, err.response.status, 'LOGIN_FAIL')
-        );
+        dispatch(setLoginError());
         dispatch({
-          type: LOGIN_FAIL,
+          type: RESET_TOKEN,
         });
       });
   };

@@ -1,14 +1,32 @@
-export const USER_LOADING = "USER_LOADING";
-export const USER_LOADED = "USER_LOADED";
+// User and Auth
+export const USER_LOADING = 'USER_LOADING';
+export const USER_LOADED = 'USER_LOADED';
 
-export const AUTH_ERROR = "AUTH_ERROR";
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 
-export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-export const LOGIN_FAIL = "LOGIN_FAIL";
-export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const RESET_TOKEN = 'RESET_TOKEN';
 
-export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
-export const REGISTER_FAIL = "REGISTER_FAIL";
+// Errors
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
-export const GET_ERRORS = "GET_ERRORS";
-export const CLEAR_ERRORS = "CLEAR_ERRORS";
+// Token
+export const SET_TOKEN_ERROR = 'SET_TOKEN_ERROR';
+export const CLEAR_TOKEN_ERROR = 'CLEAR_TOKEN_ERROR';
+
+// Login
+export const SET_EMAIL_ERROR = 'SET_EMAIL_ERROR';
+export const CLEAR_EMAIL_ERROR = 'CLEAR_EMAIL_ERROR';
+export const SET_PASSWORD_ERROR = 'SET_PASSWORD_ERROR';
+export const CLEAR_PASSWORD_ERROR = 'CLEAR_PASSWORD_ERROR';
+
+// Register
+export const SET_REGISTER_ERROR = 'SET_REGISTER_ERROR';
+export const CLEAR_REGISTER_ERROR = 'CLEAR_REGISTER_ERROR';
+export const SET_LOGIN_ERROR = 'SET_LOGIN_ERROR';
+export const CLEAR_LOGIN_ERROR = 'CLEAR_LOGIN_ERROR';
+
+// Server
+export const SET_SERVER_ERROR = 'SET_SERVER_ERROR';
+export const CLEAR_SERVER_ERROR = 'CLEAR_SERVER_ERROR';

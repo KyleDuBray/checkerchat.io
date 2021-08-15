@@ -1,27 +1,46 @@
-import { GET_ERRORS, CLEAR_ERRORS } from "../actions/types";
+import {
+  CLEAR_ERRORS,
+  SET_TOKEN_ERROR,
+  CLEAR_TOKEN_ERROR,
+  SET_EMAIL_ERROR,
+  CLEAR_EMAIL_ERROR,
+  SET_PASSWORD_ERROR,
+  CLEAR_PASSWORD_ERROR,
+  SET_REGISTER_ERROR,
+  CLEAR_REGISTER_ERROR,
+  SET_LOGIN_ERROR,
+  CLEAR_LOGIN_ERROR,
+  SET_SERVER_ERROR,
+  CLEAR_SERVER_ERROR,
+} from '../actions/types';
 
-const initialState = {
-  msg: {},
-  status: null,
-  id: null,
-};
+const initialState = [];
 
 const errorReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_ERRORS:
-      return {
-        msg: action.payload.msg,
-        status: action.payload.status,
-        id: action.payload.id,
-      };
     case CLEAR_ERRORS:
-      return {
-        msg: {},
-        status: null,
-        id: null,
-      };
+      return [];
+    case SET_TOKEN_ERROR:
+    case SET_EMAIL_ERROR:
+    case SET_PASSWORD_ERROR:
+    case SET_REGISTER_ERROR:
+    case SET_LOGIN_ERROR:
+    case SET_SERVER_ERROR:
+      return [
+        ...state,
+        { msg: action.payload.msg, type: formatErrorType(action) },
+      ];
+    case CLEAR_TOKEN_ERROR:
+    case CLEAR_EMAIL_ERROR:
+    case CLEAR_PASSWORD_ERROR:
+    case CLEAR_REGISTER_ERROR:
+    case CLEAR_LOGIN_ERROR:
+    case CLEAR_SERVER_ERROR:
+      return state.filter((err) => err.type !== formatErrorType(action));
     default:
       return state;
   }
 };
+
+const formatErrorType = ({ type }) => type.substr(4, type.length);
 export default errorReducer;

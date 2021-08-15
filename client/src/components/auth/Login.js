@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { login } from '../../actions/authActions';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const error = useSelector((state) => state.error);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -14,6 +15,10 @@ const Login = () => {
     setEmail('');
     setPassword('');
   };
+
+  const renderEmailError = () => {};
+
+  const renderPasswordError = () => {};
 
   return (
     <div className="flex justify-center">
