@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   setTokenError,
   clearTokenError,
@@ -6,8 +6,8 @@ import {
   clearLoginError,
   setRegisterError,
   clearRegisterError,
-} from "./errorActions";
-import history from "../history";
+} from './errorActions';
+import history from '../history';
 
 import {
   USER_LOADING,
@@ -16,9 +16,9 @@ import {
   LOGIN_SUCCESS,
   LOGOUT_SUCCESS,
   RESET_TOKEN,
-} from "./types";
+} from './types';
 
-// Check token & load user
+// Check token in local storage & load user
 // 1) -> USER_LOADING...(auth)
 // 2)  SUCCESS -> USER_LOADED(auth), clearTokenError(errors)
 //     FAIL -> setTokenError(errors), RESET_TOKEN(auth),
@@ -27,7 +27,7 @@ export const loadUser = () => (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
 
   axios
-    .get("http://localhost:4000/api/auth", tokenConfig(getState))
+    .get('http://localhost:4000/api/auth', tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: USER_LOADED,
@@ -51,7 +51,7 @@ export const register =
     // Headers
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
 
@@ -62,7 +62,7 @@ export const register =
     dispatch({ type: USER_LOADING });
 
     axios
-      .post("/api/users", body, config)
+      .post('/api/users', body, config)
       .then((res) => {
         dispatch({
           type: REGISTER_SUCCESS,
@@ -88,7 +88,7 @@ export const login =
     // Headers
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
 
@@ -99,14 +99,14 @@ export const login =
     const body = JSON.stringify({ email, password });
 
     axios
-      .post("/api/auth", body, config)
+      .post('/api/auth', body, config)
       .then((res) => {
         dispatch({
           type: LOGIN_SUCCESS,
           payload: res.data,
         });
         dispatch(clearLoginError());
-        history.push("/home");
+        history.push('/home');
       })
       .catch((err) => {
         dispatch(setLoginError());
@@ -118,7 +118,7 @@ export const login =
 
 // Logout User
 export const logout = () => {
-  history.push("/login");
+  history.push('/login');
   return {
     type: LOGOUT_SUCCESS,
   };
@@ -132,13 +132,13 @@ export const tokenConfig = (getState) => {
   // Headers
   const config = {
     headers: {
-      "Content-type": "application/json",
+      'Content-type': 'application/json',
     },
   };
 
   // If token, add to headers
   if (token) {
-    config.headers["x-auth-token"] = token;
+    config.headers['x-auth-token'] = token;
   }
 
   return config;

@@ -33,7 +33,7 @@ const Navbar = () => {
   return (
     <nav className="absolute w-screen flex items-center justify-between flex-wrap bg-gray-100 p-6">
       <div className="flex items-center flex-shrink-0 mr-6">
-        <Link to="/">
+        <Link to="/home">
           <div className="flex items-center">
             <Logo width="36px" height="36px" />
             <span className="ml-1 font-semibold text-xl tracking-tight">

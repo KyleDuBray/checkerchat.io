@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { login } from '../../actions/authActions';
+import history from '../../history';
 
 const Login = () => {
   const dispatch = useDispatch();
   const error = useSelector((state) => state.error);
+  const auth = useSelector((state) => state.auth);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  // go to home if already authenticated
+  useEffect(() => {
+    if (auth.isAuthenticated && !auth.isLoading) {
+      history.push('/home');
+    }
+  }, [auth]);
 
   const onLoginSubmit = () => {
     console.log('logging in');
