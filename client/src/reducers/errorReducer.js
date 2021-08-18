@@ -12,7 +12,7 @@ import {
   CLEAR_LOGIN_ERROR,
   SET_SERVER_ERROR,
   CLEAR_SERVER_ERROR,
-} from "../actions/types";
+} from '../actions/types';
 
 // Error state format to go to store: [{msg:"", type:"<SOMETYPE>_ERROR"}, ...]
 const initialState = [];
@@ -27,6 +27,11 @@ const errorReducer = (state = initialState, action) => {
     case SET_REGISTER_ERROR:
     case SET_LOGIN_ERROR:
     case SET_SERVER_ERROR:
+      for (const err of state) {
+        if (err.type === formatErrorType(action)) {
+          return state;
+        }
+      }
       return [
         ...state,
         { msg: action.payload.msg, type: formatErrorType(action) },
@@ -43,5 +48,11 @@ const errorReducer = (state = initialState, action) => {
   }
 };
 
-const formatErrorType = ({ type }) => type.substr(4, type.length);
+const formatErrorType = ({ type }) => {
+  if (type.startsWith('CLEAR')) {
+    return type.substr(6, type.length);
+  }
+  return type.substr(4, type.length);
+};
+
 export default errorReducer;

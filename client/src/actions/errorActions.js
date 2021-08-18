@@ -20,21 +20,7 @@ export const clearErrors = () => {
   };
 };
 
-export const setTokenError = () => {
-  return {
-    type: SET_TOKEN_ERROR,
-    payload: {
-      msg: 'Invalid Token. Please either provide a valid login or sign up.',
-    },
-  };
-};
-
-export const clearTokenError = () => {
-  return {
-    type: CLEAR_TOKEN_ERROR,
-  };
-};
-
+// FORM
 export const setEmailError = () => {
   return {
     type: SET_EMAIL_ERROR,
@@ -62,6 +48,22 @@ export const setPasswordError = () => {
 export const clearPasswordError = () => {
   return {
     type: CLEAR_PASSWORD_ERROR,
+  };
+};
+
+// BACK END
+export const setTokenError = () => {
+  return {
+    type: SET_TOKEN_ERROR,
+    payload: {
+      msg: 'Invalid Token. Please either provide a valid login or sign up.',
+    },
+  };
+};
+
+export const clearTokenError = () => {
+  return {
+    type: CLEAR_TOKEN_ERROR,
   };
 };
 

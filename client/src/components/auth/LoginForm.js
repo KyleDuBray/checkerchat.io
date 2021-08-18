@@ -22,12 +22,32 @@ const LoginForm = ({ onSubmit, validateEmail, validatePassword }) => {
     setPassword('');
   };
 
-  const onEmailBlur = () => {
-    validateEmail(email);
+  // ONCHANGE
+  const onEmailChange = (e) => {
+    setEmail(e.target.value);
+    if (emailTouched) {
+      validateEmail(e.target.value);
+    }
   };
 
+  const onPasswordChange = (e) => {
+    setPassword(e.target.value);
+    if (passwordTouched) {
+      validatePassword(e.target.value);
+    }
+  };
+
+  // BLUR VALIDATION
+  const [emailTouched, setEmailTouched] = useState(false);
+  const onEmailBlur = () => {
+    validateEmail(email);
+    setEmailTouched(true);
+  };
+
+  const [passwordTouched, setPasswordTouched] = useState(false);
   const onPasswordBlur = () => {
     validatePassword(password);
+    setPasswordTouched(true);
   };
 
   return (
@@ -49,7 +69,7 @@ const LoginForm = ({ onSubmit, validateEmail, validatePassword }) => {
               id="email"
               type="text"
               placeholder="email"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={onEmailChange}
               value={email}
               ref={emailRef}
               onBlur={onEmailBlur}
@@ -67,7 +87,7 @@ const LoginForm = ({ onSubmit, validateEmail, validatePassword }) => {
               id="password"
               type="password"
               placeholder="******************"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={onPasswordChange}
               value={password}
               onKeyPress={(e) => {
                 if (e.key === 'Enter') onLoginSubmit();
