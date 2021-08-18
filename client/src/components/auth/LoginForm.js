@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { useRef } from 'react';
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { useRef } from "react";
+import {
+  clearEmailError,
+  clearPasswordError,
+} from "../../actions/errorActions";
 
 const LoginForm = ({ onSubmit, validateEmail, validatePassword }) => {
   const emailRef = useRef();
@@ -9,17 +13,22 @@ const LoginForm = ({ onSubmit, validateEmail, validatePassword }) => {
 
   const dispatch = useDispatch();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     emailRef.current.focus();
+
+    return () => {
+      dispatch(clearEmailError());
+      dispatch(clearPasswordError());
+    };
   }, []);
 
   const onLoginSubmit = () => {
     onSubmit(email, password);
-    setEmail('');
-    setPassword('');
+    setEmail("");
+    setPassword("");
   };
 
   // ONCHANGE
@@ -90,7 +99,7 @@ const LoginForm = ({ onSubmit, validateEmail, validatePassword }) => {
               onChange={onPasswordChange}
               value={password}
               onKeyPress={(e) => {
-                if (e.key === 'Enter') onLoginSubmit();
+                if (e.key === "Enter") onLoginSubmit();
               }}
               ref={passwordRef}
               onBlur={onPasswordBlur}

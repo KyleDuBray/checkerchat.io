@@ -1,10 +1,9 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
+import { useSelector } from "react-redux";
 
-import Row from './Row';
+import Row from "./Row";
 
 const CheckerBoard = () => {
-  const dispatch = useDispatch();
   const board = useSelector((state) => state.game.board);
 
   const renderBoardRows = () => {
