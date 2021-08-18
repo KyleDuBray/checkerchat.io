@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { login } from '../../actions/authActions';
 import history from '../../history';
+import LoginForm from './LoginForm';
 
 const Login = () => {
   const dispatch = useDispatch();
-  const error = useSelector((state) => state.error);
+  const errors = useSelector((state) => state.errors);
   const auth = useSelector((state) => state.auth);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
   // go to home if already authenticated
   useEffect(() => {
@@ -18,80 +16,30 @@ const Login = () => {
     }
   }, [auth]);
 
-  const onLoginSubmit = () => {
+  const onLoginSubmit = (email, password) => {
     console.log('logging in');
     dispatch(login({ email, password }));
-    setEmail('');
-    setPassword('');
   };
 
-  const renderEmailError = () => {};
+  const validateEmail = (email) => {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    console.log(re.test(String(email).toLowerCase()));
+  };
 
-  const renderPasswordError = () => {};
+  const validatePassword = (password) => {
+    if (password.length < 6) {
+      console.log('Please enter a valid password');
+    }
+  };
 
   return (
-    <div className="flex justify-center">
-      <div className="w-full max-w-xs">
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-32">
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="email"
-            >
-              Email
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
-              type="text"
-              placeholder="email"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-            />
-          </div>
-          <div className="mb-6">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="password"
-            >
-              Password
-            </label>
-            <input
-              className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="password"
-              type="password"
-              placeholder="******************"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              onKeyPress={(e) => {
-                if (e.key === 'Enter') onLoginSubmit();
-              }}
-            />
-            <p className="text-red-500 text-xs italic">
-              Please choose a password.
-            </p>
-          </div>
-          <div className="flex items-center justify-between">
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300 focus:shadow-outline"
-              type="button"
-              onClick={onLoginSubmit}
-            >
-              Sign In
-            </button>
-            <Link
-              className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-              to="/"
-            >
-              Forgot Password?
-            </Link>
-          </div>
-        </form>
-        <p className="text-center text-gray-500 text-xs">
-          &copy;Kyle DuBray. All Rights Reserved.
-        </p>
-      </div>
-    </div>
+    <LoginForm
+      onSubmit={onLoginSubmit}
+      errors={errors}
+      validateEmail={validateEmail}
+      validatePassword={validatePassword}
+    />
   );
 };
 
