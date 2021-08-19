@@ -7,7 +7,7 @@ import {
   clearPasswordError,
 } from "../../actions/errorActions";
 
-const LoginForm = ({ onSubmit, validateEmail, validatePassword }) => {
+const LoginForm = ({ onSubmit, validateEmail, validatePassword, errors }) => {
   const emailRef = useRef();
   const passwordRef = useRef();
 
@@ -59,6 +59,30 @@ const LoginForm = ({ onSubmit, validateEmail, validatePassword }) => {
     setPasswordTouched(true);
   };
 
+  // ERROR STYLES
+
+  const renderEmailErrorStyles = () => {
+    if (errors.email) {
+      return (
+        <p className="text-red-500 text-xs italic">
+          Please enter a valid email.
+        </p>
+      );
+    }
+    return null;
+  };
+
+  const renderPasswordErrorStyles = () => {
+    if (errors.password) {
+      return (
+        <p className="text-red-500 text-xs italic">
+          Please enter a valid password.
+        </p>
+      );
+    }
+    return null;
+  };
+
   return (
     <div className="flex justify-center">
       <div className="w-full max-w-xs">
@@ -74,7 +98,9 @@ const LoginForm = ({ onSubmit, validateEmail, validatePassword }) => {
               Email
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className={`shadow appearance-none border ${
+                errors.email ? "border-red-500" : null
+              } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
               id="email"
               type="text"
               placeholder="email"
@@ -92,7 +118,9 @@ const LoginForm = ({ onSubmit, validateEmail, validatePassword }) => {
               Password
             </label>
             <input
-              className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              className={`shadow appearance-none border ${
+                errors.password ? "border-red-500" : null
+              } rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
               id="password"
               type="password"
               placeholder="******************"
@@ -104,9 +132,8 @@ const LoginForm = ({ onSubmit, validateEmail, validatePassword }) => {
               ref={passwordRef}
               onBlur={onPasswordBlur}
             />
-            <p className="text-red-500 text-xs italic">
-              Please choose a password.
-            </p>
+            {renderEmailErrorStyles()}
+            {renderPasswordErrorStyles()}
           </div>
           <div className="flex items-center justify-between">
             <button

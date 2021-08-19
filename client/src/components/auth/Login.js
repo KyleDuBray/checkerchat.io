@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../actions/authActions';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../actions/authActions";
 import {
   setEmailError,
   clearEmailError,
   setPasswordError,
   clearPasswordError,
-} from '../../actions/errorActions';
-import history from '../../history';
-import LoginForm from './LoginForm';
+} from "../../actions/errorActions";
+import history from "../../history";
+import LoginForm from "./LoginForm";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const Login = () => {
   // go to home if already authenticated
   useEffect(() => {
     if (auth.isAuthenticated && !auth.isLoading) {
-      history.push('/home');
+      history.push("/home");
     }
   }, [auth]);
 
@@ -30,7 +30,6 @@ const Login = () => {
   const validateEmail = (email) => {
     const re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    console.log();
     if (!re.test(String(email).toLowerCase())) {
       dispatch(setEmailError());
     } else {
@@ -39,20 +38,31 @@ const Login = () => {
   };
 
   const validatePassword = (password) => {
-    console.log(password.length);
     if (password.length < 6) {
-      console.log(`password short. Error`);
       dispatch(setPasswordError());
     } else {
-      console.log(`password sufficient`);
       dispatch(clearPasswordError());
     }
+  };
+
+  const setErrors = () => {
+    const formErrors = {};
+    errors.forEach((err) => {
+      if (err.type === "EMAIL_ERROR") {
+        formErrors.email = true;
+      }
+      if (err.type === "PASSWORD_ERROR") {
+        formErrors.password = true;
+      }
+    });
+
+    return formErrors;
   };
 
   return (
     <LoginForm
       onSubmit={onLoginSubmit}
-      errors={errors}
+      errors={setErrors()}
       validateEmail={validateEmail}
       validatePassword={validatePassword}
     />

@@ -42,7 +42,6 @@ const errorReducer = (state = initialState, action) => {
     case CLEAR_REGISTER_ERROR:
     case CLEAR_LOGIN_ERROR:
     case CLEAR_SERVER_ERROR:
-      console.log(formatErrorType(action));
       return state.filter((err) => err.type !== formatErrorType(action));
     default:
       return state;
@@ -52,8 +51,9 @@ const errorReducer = (state = initialState, action) => {
 const formatErrorType = ({ type }) => {
   if (type.startsWith("CLEAR")) {
     return type.substr(6, type.length);
+  } else if (type.startsWith("SET")) {
+    return type.substr(4, type.length);
   }
-  return type.substr(4, type.length);
 };
 
 export default errorReducer;
