@@ -1,19 +1,19 @@
-const config = require("./config");
-const express = require("express");
-const connectDB = require("./config/db");
-const cors = require("cors");
+const config = require('./config');
+const express = require('express');
+const connectDB = require('./config/db');
+const cors = require('cors');
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use("/api/users", require("./routes/api/users"));
-app.use("/api/auth", require("./routes/api/auth"));
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
 
-const http = require("http").createServer(app);
-const io = require("socket.io")(http, {
+const http = require('http').createServer(app);
+const io = require('socket.io')(http, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: 'http://localhost:3000',
   },
 });
 
@@ -30,23 +30,21 @@ connectDB();
 // that are the name of each room, each containing an array
 // of the client ids in that room.
 
-const defaultRoom = "default";
+const defaultRoom = 'default';
 const rooms = {};
 
-io.on("connection", (socket) => {
-  console.log("New client connected");
+io.on('connection', (socket) => {
+  console.log('New client connected');
 
-  socket.on("message", ({ name, message, room }) => {
+  socket.on('message', ({ name, message, room }) => {
     if (room === defaultRoom) {
-      console.log("the room was empty");
-      io.to(defaultRoom).emit("message", { name, message });
+      io.to(defaultRoom).emit('message', { name, message });
     } else {
-      console.log(`it was sent to ${room}`);
-      io.to(room).emit("message", { name, message });
+      io.to(room).emit('message', { name, message });
     }
   });
 
-  socket.on("join-room", (room) => {
+  socket.on('join-room', (room) => {
     // Leave previous room when joining new room
     for (const r in rooms) {
       if (rooms[r].includes(socket.id)) {
@@ -74,7 +72,7 @@ io.on("connection", (socket) => {
     console.log(rooms);
   });
 
-  socket.on("disconnect", () => {
+  socket.on('disconnect', () => {
     // Leave all rooms before disconnect
     for (const r in rooms) {
       if (rooms[r].includes(socket.id)) {
@@ -87,8 +85,7 @@ io.on("connection", (socket) => {
         }
       }
     }
-    console.log("Client disconnected");
-    console.log(rooms);
+    console.log(`Client with id ${socket.id} has disconnected.`);
   });
 });
 
