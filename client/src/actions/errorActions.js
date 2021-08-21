@@ -6,6 +6,8 @@ import {
   CLEAR_EMAIL_ERROR,
   SET_PASSWORD_ERROR,
   CLEAR_PASSWORD_ERROR,
+  SET_NAME_ERROR,
+  CLEAR_NAME_ERROR,
   SET_REGISTER_ERROR,
   CLEAR_REGISTER_ERROR,
   SET_LOGIN_ERROR,
@@ -48,6 +50,21 @@ export const setPasswordError = () => {
 export const clearPasswordError = () => {
   return {
     type: CLEAR_PASSWORD_ERROR,
+  };
+};
+
+export const setNameError = () => {
+  return {
+    type: SET_NAME_ERROR,
+    payload: {
+      msg: 'Please enter your name.',
+    },
+  };
+};
+
+export const clearNameError = () => {
+  return {
+    type: CLEAR_NAME_ERROR,
   };
 };
 

@@ -12,11 +12,13 @@ export const RESET_TOKEN = 'RESET_TOKEN';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
 //// FORM
-//*********/ Login
+//*********/ Login/Register
 export const SET_EMAIL_ERROR = 'SET_EMAIL_ERROR';
 export const CLEAR_EMAIL_ERROR = 'CLEAR_EMAIL_ERROR';
 export const SET_PASSWORD_ERROR = 'SET_PASSWORD_ERROR';
 export const CLEAR_PASSWORD_ERROR = 'CLEAR_PASSWORD_ERROR';
+export const SET_NAME_ERROR = 'SET_NAME_ERROR';
+export const CLEAR_NAME_ERROR = 'CLEAR_NAME_ERROR';
 
 //// BACK END
 ///********/ Token

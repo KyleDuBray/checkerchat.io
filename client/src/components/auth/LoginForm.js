@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { useRef } from "react";
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { useRef } from 'react';
 import {
   clearEmailError,
+  setEmailError,
   clearPasswordError,
-} from "../../actions/errorActions";
+  setPasswordError,
+} from '../../actions/errorActions';
 
 const LoginForm = ({ onSubmit, validateEmail, validatePassword, errors }) => {
   const emailRef = useRef();
@@ -13,8 +15,8 @@ const LoginForm = ({ onSubmit, validateEmail, validatePassword, errors }) => {
 
   const dispatch = useDispatch();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
     emailRef.current.focus();
@@ -27,35 +29,47 @@ const LoginForm = ({ onSubmit, validateEmail, validatePassword, errors }) => {
 
   const onLoginSubmit = () => {
     onSubmit(email, password);
-    setEmail("");
-    setPassword("");
+    setEmail('');
+    setPassword('');
   };
 
   // ONCHANGE
   const onEmailChange = (e) => {
     setEmail(e.target.value);
     if (emailTouched) {
-      validateEmail(e.target.value);
+      if (validateEmail(e.target.value)) {
+        dispatch(clearEmailError());
+      } else {
+        dispatch(setEmailError());
+      }
     }
   };
 
   const onPasswordChange = (e) => {
     setPassword(e.target.value);
     if (passwordTouched) {
-      validatePassword(e.target.value);
+      if (validatePassword(e.target.value)) {
+        dispatch(clearPasswordError());
+      } else {
+        dispatch(setPasswordError());
+      }
     }
   };
 
   // BLUR VALIDATION
   const [emailTouched, setEmailTouched] = useState(false);
   const onEmailBlur = () => {
-    validateEmail(email);
+    if (validateEmail(email)) {
+      dispatch(clearEmailError());
+    } else dispatch(setEmailError());
     setEmailTouched(true);
   };
 
   const [passwordTouched, setPasswordTouched] = useState(false);
   const onPasswordBlur = () => {
-    validatePassword(password);
+    if (validatePassword(password)) {
+      dispatch(clearPasswordError());
+    } else dispatch(setPasswordError());
     setPasswordTouched(true);
   };
 
@@ -99,7 +113,7 @@ const LoginForm = ({ onSubmit, validateEmail, validatePassword, errors }) => {
             </label>
             <input
               className={`shadow appearance-none border ${
-                errors.email ? "border-red-500" : null
+                errors.email ? 'border-red-500' : null
               } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
               id="email"
               type="text"
@@ -119,7 +133,7 @@ const LoginForm = ({ onSubmit, validateEmail, validatePassword, errors }) => {
             </label>
             <input
               className={`shadow appearance-none border ${
-                errors.password ? "border-red-500" : null
+                errors.password ? 'border-red-500' : null
               } rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
               id="password"
               type="password"
@@ -127,7 +141,7 @@ const LoginForm = ({ onSubmit, validateEmail, validatePassword, errors }) => {
               onChange={onPasswordChange}
               value={password}
               onKeyPress={(e) => {
-                if (e.key === "Enter") onLoginSubmit();
+                if (e.key === 'Enter') onLoginSubmit();
               }}
               ref={passwordRef}
               onBlur={onPasswordBlur}
