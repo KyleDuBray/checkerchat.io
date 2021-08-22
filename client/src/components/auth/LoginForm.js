@@ -11,7 +11,6 @@ import {
 
 const LoginForm = ({ onSubmit, validateEmail, validatePassword, errors }) => {
   const emailRef = useRef();
-  const passwordRef = useRef();
 
   const dispatch = useDispatch();
 
@@ -75,7 +74,7 @@ const LoginForm = ({ onSubmit, validateEmail, validatePassword, errors }) => {
 
   // ERROR STYLES
 
-  const renderEmailErrorStyles = useMemo(() => {
+  const emailErrorStyles = useMemo(() => {
     if (errors.email) {
       return (
         <p className="text-red-500 text-xs italic">
@@ -86,7 +85,7 @@ const LoginForm = ({ onSubmit, validateEmail, validatePassword, errors }) => {
     return null;
   }, [errors]);
 
-  const renderPasswordErrorStyles = useMemo(() => {
+  const passwordErrorStyles = useMemo(() => {
     if (errors.password) {
       return (
         <p className="text-red-500 text-xs italic">
@@ -143,11 +142,10 @@ const LoginForm = ({ onSubmit, validateEmail, validatePassword, errors }) => {
               onKeyPress={(e) => {
                 if (e.key === 'Enter') onLoginSubmit();
               }}
-              ref={passwordRef}
               onBlur={onPasswordBlur}
             />
-            {renderEmailErrorStyles}
-            {renderPasswordErrorStyles}
+            {emailErrorStyles}
+            {passwordErrorStyles}
           </div>
           <div className="flex items-center justify-between">
             <button

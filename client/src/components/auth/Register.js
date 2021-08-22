@@ -9,7 +9,7 @@ import RegisterForm from './RegisterForm';
 import {
   validateEmail,
   validatePassword,
-  validateName,
+  validateUsername,
 } from './utilities/validate';
 
 const Register = () => {
@@ -24,7 +24,7 @@ const Register = () => {
     }
   }, [auth]);
 
-  //Dipatch register
+  // Dipatch register
   const onRegisterSubmit = (name, email, password) => {
     dispatch(register(name, email, password));
   };
@@ -42,8 +42,8 @@ const Register = () => {
       if (err.type === 'PASSWORD_ERROR') {
         formErrors.password = true;
       }
-      if (err.type === 'NAME_ERROR') {
-        formErrors.name = true;
+      if (err.type === 'USERNAME_ERROR') {
+        formErrors.username = true;
       }
     });
 
@@ -56,7 +56,7 @@ const Register = () => {
       errors={setErrors()}
       validateEmail={validateEmail}
       validatePassword={validatePassword}
-      validateName={validateName}
+      validateUsername={validateUsername}
     />
   );
 };

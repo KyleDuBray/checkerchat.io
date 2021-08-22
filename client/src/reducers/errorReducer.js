@@ -6,8 +6,8 @@ import {
   CLEAR_EMAIL_ERROR,
   SET_PASSWORD_ERROR,
   CLEAR_PASSWORD_ERROR,
-  SET_NAME_ERROR,
-  CLEAR_NAME_ERROR,
+  SET_USERNAME_ERROR,
+  CLEAR_USERNAME_ERROR,
   SET_REGISTER_ERROR,
   CLEAR_REGISTER_ERROR,
   SET_LOGIN_ERROR,
@@ -27,7 +27,7 @@ const errorReducer = (state = initialState, action) => {
     case SET_EMAIL_ERROR:
     case SET_PASSWORD_ERROR:
     case SET_REGISTER_ERROR:
-    case SET_NAME_ERROR:
+    case SET_USERNAME_ERROR:
     case SET_LOGIN_ERROR:
     case SET_SERVER_ERROR:
       for (const err of state) {
@@ -42,7 +42,7 @@ const errorReducer = (state = initialState, action) => {
     case CLEAR_TOKEN_ERROR:
     case CLEAR_EMAIL_ERROR:
     case CLEAR_PASSWORD_ERROR:
-    case CLEAR_NAME_ERROR:
+    case CLEAR_USERNAME_ERROR:
     case CLEAR_REGISTER_ERROR:
     case CLEAR_LOGIN_ERROR:
     case CLEAR_SERVER_ERROR:

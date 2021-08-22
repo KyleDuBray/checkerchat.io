@@ -46,7 +46,7 @@ export const loadUser = () => (dispatch, getState) => {
 // 2)  SUCCESS -> REGISTER_SUCCESS(auth), clearRegisterError(errors)
 //     FAIL -> setRegisterError(errors), RESET_TOKEN(auth)
 export const register =
-  ({ name, email, password }) =>
+  ({ username, email, password }) =>
   (dispatch) => {
     // Headers
     const config = {
@@ -56,7 +56,7 @@ export const register =
     };
 
     // Request body
-    const body = JSON.stringify({ name, email, password });
+    const body = JSON.stringify({ username, email, password });
 
     // Set Loading to true
     dispatch({ type: USER_LOADING });

@@ -16,8 +16,9 @@ export const validatePassword = (password) => {
   } else return true;
 };
 
-export const validateName = (name) => {
-  if (name.length > 0) {
+export const validateUsername = (username) => {
+  console.log(username.length);
+  if (username.length > 0) {
     return true;
   } else return false;
 };

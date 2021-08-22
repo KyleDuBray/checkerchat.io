@@ -20,6 +20,7 @@ const Login = () => {
     }
   }, [auth]);
 
+  // Dipatch login
   const onLoginSubmit = (email, password) => {
     dispatch(login({ email, password }));
   };

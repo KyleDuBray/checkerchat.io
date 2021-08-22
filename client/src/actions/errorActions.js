@@ -6,8 +6,8 @@ import {
   CLEAR_EMAIL_ERROR,
   SET_PASSWORD_ERROR,
   CLEAR_PASSWORD_ERROR,
-  SET_NAME_ERROR,
-  CLEAR_NAME_ERROR,
+  SET_USERNAME_ERROR,
+  CLEAR_USERNAME_ERROR,
   SET_REGISTER_ERROR,
   CLEAR_REGISTER_ERROR,
   SET_LOGIN_ERROR,
@@ -53,18 +53,18 @@ export const clearPasswordError = () => {
   };
 };
 
-export const setNameError = () => {
+export const setUsernameError = () => {
   return {
-    type: SET_NAME_ERROR,
+    type: SET_USERNAME_ERROR,
     payload: {
-      msg: 'Please enter your name.',
+      msg: 'Please enter a username.',
     },
   };
 };
 
-export const clearNameError = () => {
+export const clearUsernameError = () => {
   return {
-    type: CLEAR_NAME_ERROR,
+    type: CLEAR_USERNAME_ERROR,
   };
 };
 
