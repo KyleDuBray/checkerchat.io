@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useRef } from 'react';
@@ -75,7 +75,7 @@ const LoginForm = ({ onSubmit, validateEmail, validatePassword, errors }) => {
 
   // ERROR STYLES
 
-  const renderEmailErrorStyles = () => {
+  const renderEmailErrorStyles = useMemo(() => {
     if (errors.email) {
       return (
         <p className="text-red-500 text-xs italic">
@@ -84,9 +84,9 @@ const LoginForm = ({ onSubmit, validateEmail, validatePassword, errors }) => {
       );
     }
     return null;
-  };
+  }, [errors]);
 
-  const renderPasswordErrorStyles = () => {
+  const renderPasswordErrorStyles = useMemo(() => {
     if (errors.password) {
       return (
         <p className="text-red-500 text-xs italic">
@@ -95,7 +95,7 @@ const LoginForm = ({ onSubmit, validateEmail, validatePassword, errors }) => {
       );
     }
     return null;
-  };
+  }, [errors]);
 
   return (
     <div className="flex justify-center">
@@ -146,8 +146,8 @@ const LoginForm = ({ onSubmit, validateEmail, validatePassword, errors }) => {
               ref={passwordRef}
               onBlur={onPasswordBlur}
             />
-            {renderEmailErrorStyles()}
-            {renderPasswordErrorStyles()}
+            {renderEmailErrorStyles}
+            {renderPasswordErrorStyles}
           </div>
           <div className="flex items-center justify-between">
             <button

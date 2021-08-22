@@ -1,13 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { login } from '../../actions/authActions';
-import {
-  setEmailError,
-  clearEmailError,
-  setPasswordError,
-  clearPasswordError,
-} from '../../actions/errorActions';
+
 import history from '../../history';
 
 import LoginForm from './LoginForm';
@@ -18,7 +13,7 @@ const Login = () => {
   const errors = useSelector((state) => state.errors);
   const auth = useSelector((state) => state.auth);
 
-  // go to home if already authenticated
+  // Go to home if already authenticated
   useEffect(() => {
     if (auth.isAuthenticated && !auth.isLoading) {
       history.push('/home');
@@ -29,7 +24,11 @@ const Login = () => {
     dispatch(login({ email, password }));
   };
 
-  const setErrors = () => {
+  // Set errors for specific form fields based on
+  // errors in redux store. The form is responsible for
+  // setting and clearing the errors, while this parent
+  // component will send the errors back down to the form
+  const setErrors = useCallback(() => {
     const formErrors = {};
     errors.forEach((err) => {
       if (err.type === 'EMAIL_ERROR') {
@@ -41,7 +40,7 @@ const Login = () => {
     });
 
     return formErrors;
-  };
+  }, [errors]);
 
   return (
     <LoginForm

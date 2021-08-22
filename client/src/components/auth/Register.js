@@ -1,19 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { register } from '../../actions/authActions';
-import {
-  setEmailError,
-  clearEmailError,
-  setPasswordError,
-  clearPasswordError,
-  setNameError,
-  clearNameError,
-} from '../../actions/errorActions';
+
 import history from '../../history';
 
 import RegisterForm from './RegisterForm';
-import { validateEmail, validatePassword } from './utilities/validate';
+import {
+  validateEmail,
+  validatePassword,
+  validateName,
+} from './utilities/validate';
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -27,7 +24,41 @@ const Register = () => {
     }
   }, [auth]);
 
-  return <RegisterForm />;
+  //Dipatch register
+  const onRegisterSubmit = (name, email, password) => {
+    dispatch(register(name, email, password));
+  };
+
+  // Set errors for specific form fields based on
+  // errors in redux store. The form is responsible for
+  // setting and clearing the errors, while this parent
+  // component will send the errors back down to form.
+  const setErrors = useCallback(() => {
+    const formErrors = {};
+    errors.forEach((err) => {
+      if (err.type === 'EMAIL_ERROR') {
+        formErrors.email = true;
+      }
+      if (err.type === 'PASSWORD_ERROR') {
+        formErrors.password = true;
+      }
+      if (err.type === 'NAME_ERROR') {
+        formErrors.name = true;
+      }
+    });
+
+    return formErrors;
+  }, [errors]);
+
+  return (
+    <RegisterForm
+      onSubmit={onRegisterSubmit}
+      errors={setErrors()}
+      validateEmail={validateEmail}
+      validatePassword={validatePassword}
+      validateName={validateName}
+    />
+  );
 };
 
 export default Register;
