@@ -20,6 +20,7 @@ const LoginForm = ({ onSubmit, validateEmail, validatePassword, errors }) => {
   useEffect(() => {
     emailRef.current.focus();
 
+    // clear all form errors on component unmount
     return () => {
       dispatch(clearEmailError());
       dispatch(clearPasswordError());

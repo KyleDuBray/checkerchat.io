@@ -55,22 +55,24 @@ export const register =
       },
     };
 
-    // Request body
-    const body = JSON.stringify({ username, email, password });
-
     // Set Loading to true
     dispatch({ type: USER_LOADING });
 
+    // Request body
+    const body = JSON.stringify({ username, email, password });
+
     axios
-      .post('/api/users', body, config)
+      .post('http://localhost:4000/api/users', body, config)
       .then((res) => {
         dispatch({
           type: REGISTER_SUCCESS,
           payload: res.data,
         });
         dispatch(clearRegisterError());
+        history.push('/home');
       })
       .catch((err) => {
+        console.log(err);
         dispatch(setRegisterError());
         dispatch({
           type: RESET_TOKEN,

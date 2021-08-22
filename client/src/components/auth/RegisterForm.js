@@ -27,14 +27,16 @@ const RegisterForm = ({
   useEffect(() => {
     usernameRef.current.focus();
 
+    // clear all form errors on component unmount
     return () => {
       dispatch(clearEmailError());
       dispatch(clearPasswordError());
+      dispatch(clearUsernameError());
     };
   }, []);
 
   const onRegisterSubmit = () => {
-    onSubmit(username, email, password);
+    onSubmit({ username, email, password });
     setUsername('');
     setEmail('');
     setPassword('');

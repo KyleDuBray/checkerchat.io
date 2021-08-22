@@ -25,8 +25,8 @@ const Register = () => {
   }, [auth]);
 
   // Dipatch register
-  const onRegisterSubmit = (name, email, password) => {
-    dispatch(register(name, email, password));
+  const onRegisterSubmit = (username, email, password) => {
+    dispatch(register(username, email, password));
   };
 
   // Set errors for specific form fields based on
